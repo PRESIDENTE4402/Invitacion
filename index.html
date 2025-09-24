@@ -8,13 +8,9 @@
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+ <!-- Fuentes (1 sola solicitud) -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&family=Lora:wght@400;500;600&family=Merriweather:wght@300;400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
-
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
@@ -64,11 +60,12 @@
 
 
 <!-- SAVE THE DATE -->
-  <section class="savethedate">
+<section class="savethedate">
   <div class="std-bg"></div>
   <div class="std-inner">
     <h2 class="std-title">Save the Date</h2>
     <p class="std-date">07 Noviembre 2025</p>
+
     <div class="countdown" id="countdown">
       <div class="time-box">
         <span id="days">0</span>
@@ -87,38 +84,54 @@
         <small>SEGS</small>
       </div>
     </div>
+
+    <!-- Botón para agendar -->
+    <button id="addToCalendar" class="btn-calendar">
+      <i class="fa-regular fa-calendar-plus"></i> Agendar en mi calendario
+    </button>
   </div>
-  </section>
+</section>
+
 
 
 
 <!-- CUÁNDO Y DÓNDE -->
-    <section class="when-where">
-  
-  <h2> <i class="fa-solid fa-location-dot"></i>Cuándo y dónde</h2>
+  <!-- CUÁNDO Y DÓNDE -->
+<section class="when-where">
+  <h2><i class="fa-solid fa-location-dot" style="color: var(--accent); margin-right: 6px;" aria-hidden="true"></i>Cuándo y dónde</h2>
+
   <div class="event-card">
     <div class="event-photo">
-      <img src="assets/beso.jpeg" alt="Lugar de la ceremonia">
+      <img src="assets/beso.jpeg" alt="Lugar de la ceremonia" loading="lazy">
     </div>
+
     <div class="event-info">
       <h3 class="event-title">Boda Civil</h3>
-      <h4 class="event-place">Rincon Alvarado</h4>
-      <p><i class="fa-solid fa-location-dot"></i> 9na avenida, 2-05, Zona 2 de Mixco, Colonia Alvarado</p>
-      <p><i class="fa-solid fa-calendar-days"></i> 08 Noviembre 2025, 18:00 hrs</p>
-      
+      <h4 class="event-place">RINCÓN ALVARADO</h4>
+
+      <p class="event-direccion">
+        <i class="fa-solid fa-location-dot" aria-hidden="true" style="color: var(--accent); margin-right: 6px;"></i>
+        9na avenida, 2-05, Zona 2 de Mixco, Colonia Alvarado
+      </p>
+
+      <p class="event-direccion">
+        <i class="fa-solid fa-calendar-days" aria-hidden="true" style="color: var(--accent); margin-right: 6px;"></i>
+        <time datetime="2025-11-07T18:00">07 de noviembre de 2025, 18:00 hrs</time>
+      </p>
 
       <!-- Botones de ubicación -->
       <div class="event-buttons">
-        <a href="https://maps.app.goo.gl/1a8K2yXTLF49sBZ39" target="_blank" class="btn-map">
-          <i class="fa-brands fa-google"></i> Google Maps
+        <a href="https://maps.app.goo.gl/1a8K2yXTLF49sBZ39" target="_blank" rel="noopener" class="btn-map" aria-label="Abrir ubicación en Google Maps">
+          <i class="fa-brands fa-google" aria-hidden="true"></i> Maps
         </a>
-        <a href="https://www.waze.com/es/live-map/directions/rincon-alvarado-zona-2,-mixco?to=place.w.176554130.1765672375.2402432" target="_blank" class="btn-waze">
-          <i class="fa-brands fa-waze"></i> Waze
+        <a href="https://www.waze.com/es/live-map/directions/rincon-alvarado-zona-2,-mixco?to=place.w.176554130.1765672375.2402432" target="_blank" rel="noopener" class="btn-waze" aria-label="Abrir ubicación en Waze">
+          <i class="fa-brands fa-waze" aria-hidden="true"></i> Waze
         </a>
       </div>
     </div>
   </div>
-    </section>
+</section>
+
 
 <!-- REGALO -->
   <section class="gift" data-aos="fade-up">
@@ -144,19 +157,19 @@
 
  <div class="gallery-grid">
   <a href="assets/venda.jpeg" class="big-left" target="_blank">
-    <img src="assets/venda.jpeg" alt="Foto 1">
+    <img src="assets/venda.jpeg" alt="Foto 1" loading="lazy">
   </a>
 
   <a href="assets/espaldas.jpeg" class="small-top" target="_blank">
-    <img src="assets/espaldas.jpeg" alt="Foto 2">
+    <img src="assets/espaldas.jpeg" alt="Foto 2" loading="lazy">
   </a>
 
   <a href="assets/anillo.jpeg" class="small-bottom" target="_blank">
-    <img src="assets/anillo.jpeg" alt="Foto 3">
+    <img src="assets/anillo.jpeg" alt="Foto 3" loading="lazy">
   </a>
 
   <a href="assets/brindis.jpeg" class="big-right" target="_blank">
-    <img src="assets/brindis.jpeg" alt="Foto 4">
+    <img src="assets/brindis.jpeg" alt="Foto 4" loading="lazy">
   </a>
   </section>
 
@@ -256,7 +269,113 @@
 
 <script src="https://unpkg.com/scrollreveal"></script>
 <script>
+  // Config global
+  function initScrollReveal(){
+    if (!window.ScrollReveal) return;
 
+    const sr = ScrollReveal({
+      distance: '28px',
+      duration: 850,
+      easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      opacity: 0,
+      mobile: true,
+      viewFactor: 0.12,
+      // cleanup: true  // opcional: si quieres que limpie estilos al terminar
+    });
+
+    // Secciones
+    sr.reveal('.story',        { origin: 'bottom', delay: 150, once: true });
+    sr.reveal('.savethedate',  { origin: 'bottom', delay: 150, once: true });
+    sr.reveal('.when-where',   { origin: 'bottom', delay: 150, once: true });
+    sr.reveal('.gift',         { origin: 'bottom', delay: 150, once: true });
+    sr.reveal('.gallery',      { origin: 'bottom', delay: 150, once: true });
+    sr.reveal('.rsvp',         { origin: 'bottom', delay: 150, once: true });
+    sr.reveal('.footer',       { origin: 'bottom', delay: 150, once: true });
+
+    // Elementos internos
+    sr.reveal('.countdown .time-box', { origin: 'bottom', interval: 90, distance: '22px', duration: 700, once: true });
+    sr.reveal('.event-card',          { origin: 'bottom', distance: '32px', duration: 900, once: true });
+    sr.reveal('.event-direccion',     { origin: 'left',   interval: 80, distance: '24px', duration: 700, once: true });
+    sr.reveal('.event-buttons a',     { origin: 'bottom', interval: 80, distance: '18px', duration: 650, once: true });
+    sr.reveal('.gallery-grid a',      { origin: 'bottom', interval: 80, distance: '20px', duration: 650, once: true });
+
+    // Hero
+    sr.reveal('.hero-date', { origin: 'bottom', delay: 250, distance: '16px', duration: 650, once: true });
+
+    // Devuelve instancia para poder sincronizar luego
+    return sr;
+  }
+
+  // Respetar preferencia de reducir movimiento
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 1) Inicializa SR solo si no hay "reduce motion"
+  let srInstance = null;
+  if (!reduceMotion) {
+    // Si la invitación ya está visible (por si no usas portada)
+    const invitation = document.getElementById('invitation');
+    if (invitation && !invitation.classList.contains('hidden')) {
+      srInstance = initScrollReveal();
+    }
+  }
+
+  // 2) Al abrir la portada, muestra invitación y luego sincroniza SR
+  (function hookCover(){
+    const cover = document.getElementById('cover');
+    const invitation = document.getElementById('invitation');
+    const music = document.getElementById('bg-music');
+    if (!cover || !invitation) return;
+
+    cover.addEventListener('click', () => {
+      cover.classList.add('hidden');
+
+      setTimeout(() => {
+        invitation.classList.remove('hidden');
+
+        // Inicializa SR si no se había hecho
+        if (!reduceMotion) {
+          srInstance = srInstance || initScrollReveal();
+          // Muy importante: sincronizar ahora que los elementos ya son visibles
+          if (srInstance && typeof srInstance.sync === 'function') {
+            srInstance.sync();
+          }
+        }
+      }, 500);
+
+      // Música
+      music?.play().catch(()=>{});
+    });
+  })();
+</script>
+
+<script>
+document.getElementById('addToCalendar').addEventListener('click', function() {
+  // Evento en formato iCalendar (.ics)
+  const icsContent = `
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tu Invitación//ES
+BEGIN:VEVENT
+UID:${new Date().getTime()}@invitacion
+DTSTAMP:${new Date().toISOString().replace(/[-:]/g,"").split(".")[0]}Z
+DTSTART:20251107T180000Z
+DTEND:20251107T210000Z
+SUMMARY:Boda de Diego & Lesly
+DESCRIPTION:¡Acompáñanos a celebrar este día tan especial!
+LOCATION:Rincón Alvarado, 9na avenida, 2-05, Zona 2, Mixco, Guatemala
+END:VEVENT
+END:VCALENDAR
+  `.trim();
+
+  // Crear blob y descargar
+  const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'boda-diego-lesly.ics';
+  a.click();
+  URL.revokeObjectURL(url);
+});
 </script>
 
 

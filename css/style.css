@@ -140,7 +140,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#000;color:#fff}
 }
 
 .time-box {
-  background: rgba(248, 246, 247, 0.25); /* Bordó transparente */
+  background: rgba(248, 246, 247, 0.55); /* Bordó transparente */
   padding: 20px 30px;
   border-radius: 8px;
   min-width: 100px;
@@ -159,6 +159,26 @@ body{font-family:Inter,system-ui,sans-serif;background:#000;color:#fff}
   color: #885d08;
 }
 
+.btn-calendar {
+  margin-top: 30px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all .3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-calendar:hover {
+  background: var(--accent);
+  color: #000;
+}
 
 /* Cuando y donde */
 
@@ -208,24 +228,39 @@ body{font-family:Inter,system-ui,sans-serif;background:#000;color:#fff}
   text-align: left;
 }
 
+.event-direccion {
+  font-family: 'Lora', serif;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 12px;
+
+}
+
 .event-title {
-  color: #800020;
-  font-size: 0.9rem;
+   font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  color: #e3c17c;
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+}
+
+
+.event-place {
+    font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
   font-weight: 700;
-  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #222;
   margin-bottom: 10px;
 }
 
-.event-place {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 15px;
+.event-info h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  color: #5a3e36;
 }
 
-.event-info p {
-  margin: 8px 0;
-  line-height: 1.6;
-}
 
 .event-buttons {
   margin-top: 20px;
@@ -247,21 +282,33 @@ body{font-family:Inter,system-ui,sans-serif;background:#000;color:#fff}
 }
 
 .btn-map {
-  background: #4285F4; /* Google Blue */
-  color: #fff;
+   font-family: 'Lora', serif;
+  padding: 8px 18px;
+  border-radius: 30px;
+  border: none;
+  background: #a8b07e;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s;
 }
 
 .btn-map:hover {
-  background: #3367d6;
+  background: #e1e8ad;
 }
 
 .btn-waze {
-  background: #05C8F7; /* Waze cyan */
-  color: #fff;
+  font-family: 'Lora', serif;
+  padding: 8px 18px;
+  border-radius: 30px;
+  border: none;
+  background: #a8b07e;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s;
 }
 
 .btn-waze:hover {
-  background: #009ec7;
+  background: #e1e8ad;
 }
 
 
@@ -362,7 +409,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#000;color:#fff}
 
 .gallery-header i {
   font-size: 2.5rem;
-  color: #c51846; /* Bordó */
+  color: #999c6d; /* Bordó */
   display: block;
   margin-bottom: 10px;
 }
@@ -501,7 +548,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#000;color:#fff}
 
 .gift-icon {
   font-size: 3rem;
-  color: #c51846; /* Bordó elegante */
+  color: #aeb178; /* Bordó elegante */
   margin-bottom: 20px;
 }
 
@@ -696,4 +743,74 @@ body{font-family:Inter,system-ui,sans-serif;background:#000;color:#fff}
     font-size: 2rem;
   }
 }
+/* ==== Overrides elegantes y accesibles ==== */
+:root{
+  --accent:#c7a767;    /* dorado con mejor contraste */
+  --accent-2:#8b6b2e;  /* dorado oscuro para textos */
+  --ink:#222;
+  --muted:#f2efe9;
+  --bg:#000;
+  --shadow:rgba(0,0,0,.45);
+}
+html{scroll-behavior:smooth;text-rendering:optimizeLegibility}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:#fff}
+
+/* Jerarquía tipográfica */
+.hero-names{letter-spacing:.5px}
+.when-where h2,
+.gallery-header h2,
+.gift-title{
+  font-family:'Playfair Display',serif;
+  letter-spacing:.5px;
+  color:var(--ink);
+}
+
+/* Cuerpo elegante */
+.event-direccion,
+.gift-text{font-family:'Lora',serif}
+
+/* Lugar más sobrio */
+.event-place{
+  font-family:'Playfair Display',serif;
+  font-weight:600;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+/* Caligráfica más legible */
+.event-title{
+  font-family:'Great Vibes',cursive;
+  letter-spacing:1px;
+  color:var(--accent);
+}
+
+/* Botones unificados */
+.event-buttons{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+.event-buttons a{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:10px 18px;border-radius:999px;text-decoration:none;
+  font-weight:600;border:1px solid transparent;transition:.2s ease
+}
+.btn-map,.btn-waze{background:#a8b07e;color:#fff}
+.btn-map:hover,.btn-waze:hover{background:#9aa368;transform:translateY(-1px)}
+.btn-map:focus,.btn-waze:focus{outline:2px solid var(--accent)}
+
+/* Imágenes */
+.event-photo img,
+.story-photo img{aspect-ratio:4/3;object-fit:cover}
+
+/* Portada / motion respetando accesibilidad */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important;transition:none!important}
+}
+
+/* Anchos y respiración */
+.invitation section{max-width:1100px;margin-inline:auto}
+@media (max-width: 600px){
+  .event-card{margin-inline:16px}
+}
+
+/* Refinos */
+.hero-date{text-transform:uppercase}
+.footer .date{font-style:italic}
 
