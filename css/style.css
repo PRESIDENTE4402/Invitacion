@@ -60,24 +60,11 @@ body{font-family:Inter,system-ui,sans-serif;background:#fff;color:#222}
 }
 
 /* NUESTRA HISTORIA */
-.story {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: stretch;
-  margin: 0;
-  padding: 0;
-  background: #fff;
-  min-height: 100vh;   /* 👈 ocupa toda la pantalla */
-    /* antes había líneas divisorias doradas; se eliminan para un aspecto más suave */
-}
-
-/* PADRES */
 .padres{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding: 120px 20px; /* aumentado verticalmente */
-  min-height: 60vh;    /* asegura mayor altura visual */
+  padding: 60px 20px;
   background: #fff;
   color: #222;
 }
@@ -90,8 +77,8 @@ body{font-family:Inter,system-ui,sans-serif;background:#fff;color:#222}
   color:#666;
   margin-bottom: 18px;
 }
-.padres-columns{display:flex;gap:72px;justify-content:center;margin-bottom:22px}
-.padres .parent-list{font-family: 'Lora', serif;color:#333;line-height:1.5;padding:22px 28px;font-size:1.15rem;text-align:center}
+.padres-columns{display:flex;gap:48px;justify-content:center;margin-bottom:18px}
+.padres .parent-list{font-family: 'Lora', serif;color:#333;line-height:1.4}
 .padres-couple{font-family:'Parisienne',cursive;font-size:clamp(2rem,6vw,3.4rem);color:#8b6b2e;margin:6px 0}
 .padres-couple .and{margin:0 8px;font-family:'Lora',serif;font-size:1.1rem}
 .padres-invite{font-family:'Lora',serif;color:#444;margin-top:8px}
@@ -614,22 +601,32 @@ body{font-family:Inter,system-ui,sans-serif;background:#fff;color:#222}
   color: var(--ink, #111);
 }
 
-/* Mostrar imagen completa, centrada y responsiva */
 .cover-image{
-  position: fixed;
-  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  position: fixed; /* volvemos a fixed para que ocupe todo el viewport */
+  inset: 0; /* top/right/bottom/left 0 */
   width: 100vw;
   height: 100vh;
-  object-fit: contain; /* muestra la imagen completa sin recortar */
+  object-fit: contain;
   object-position: center center;
-  z-index: 0;
-  background: transparent;
+  z-index: 99998; /* por debajo del contenido de portada pero encima del resto */
+  background: #fff; /* evita zonas negras si la imagen tiene transparencia */
+  backface-visibility: hidden;
 }
 
 .cover-inner{position:relative; z-index:2;}
 
 @media (max-width: 900px){
   .cover-text{ margin-top: 12px; font-size: 1rem; }
+}
+
+/* En orientacion horizontal en pantallas pequeñas, rellenar el area para que la imagen sea visible */
+@media (orientation: landscape) and (max-width: 820px) {
+  .cover-image {
+    object-fit: cover; /* ocupa todo el area horizontalmente */
+    height: 100vh;
+    width: 100vw;
+    left: 0; right: 0;
+  }
 }
 
 /* Animación de pulso */
@@ -891,5 +888,34 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:#fff}
 /* Refinos */
 .hero-date{text-transform:uppercase}
 .footer .date{font-style:italic}
+
+/* ==============================
+   Force mobile layout for .padres
+   Appended at end to override earlier rules if needed
+   ============================== */
+@media (max-width: 420px) {
+  .padres { padding: 48px 12px !important; }
+  .padres-columns {
+    display: flex !important;
+    gap: 12px !important;
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    padding-bottom: 6px !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .padres .parent-list {
+    padding: 10px 12px !important;
+    font-size: 0.92rem !important;
+    line-height: 1.45 !important;
+    flex: 0 0 auto !important;
+    min-width: 180px !important;
+    max-width: 260px !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    text-align: center !important;
+  }
+  .padres-couple { font-size: clamp(1.2rem,5.5vw,2.2rem) !important; }
+}
 
 
