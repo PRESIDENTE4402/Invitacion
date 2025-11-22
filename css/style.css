@@ -20,7 +20,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#fff;color:#222}
 }
 .hero-bg{
   position:absolute; inset:0;
-  background:url("../assets/boda/_MG_7153.jpg") center/cover no-repeat;
+  background:url("/assets/boda/_MG_7153.jpg") center/cover no-repeat;
 }
 .hero::after{
   content: "";
@@ -853,4 +853,5 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:#fff}
 /* Refinos */
 .hero-date{text-transform:uppercase}
 .footer .date{font-style:italic}
+
 
