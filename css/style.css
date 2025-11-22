@@ -20,7 +20,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#fff;color:#222}
 }
 .hero-bg{
   position:absolute; inset:0;
-  background:url("../assets/_MG_7153.jpg") center/cover no-repeat;
+  background:url("../assets/foto1.jpg") center/cover no-repeat;
 }
 .hero::after{
   content: "";
