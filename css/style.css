@@ -37,7 +37,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#fff;color:#222}
 /* Nombres en tipografía elegante */
 .hero-names{
   font-family:'Parisienne', sans-serif;
-  font-size:clamp(8rem, 9vw, 8rem);
+  font-size:clamp(8rem, 12vw, 8rem);
   /* Color dorado más brillante */
   color: #ffd87a;
   /* Sutileza de contorno y múltiples sombras para efecto de brillo */
