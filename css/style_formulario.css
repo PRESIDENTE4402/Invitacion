@@ -544,3 +544,231 @@ body {
     0% { opacity: 0; transform: translateY(8px); }
     100% { opacity: 1; transform: translateY(0); }
 }
+
+
+/* Caja completa */
+.hoteles-box {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    padding: 20px;
+    margin-top: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+}
+
+/* Título */
+.hoteles-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Descripción */
+.hoteles-desc {
+    margin-bottom: 20px;
+    color: #555;
+    line-height: 1.4em;
+}
+
+/* Hotel individual */
+.hotel-item {
+    background: #fafafa;
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.hotel-item h4 {
+    margin: 0 0 5px;
+    font-size: 18px;
+    color: #444;
+}
+
+.hotel-item p {
+    margin: 0 0 10px;
+    color: #666;
+}
+
+/* Botón de reservación */
+.hotel-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #d4af37;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.hotel-btn:hover {
+    background: #b8932e;
+}
+
+
+
+/* Oculto genérico */
+.hidden {
+    display: none;
+}
+
+/* Caja completa */
+.hoteles-box {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    padding: 20px;
+    margin-top: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+}
+
+/* Título */
+.hoteles-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Descripción */
+.hoteles-desc {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* Hotel individual */
+.hotel-item {
+    background: #fafafa;
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.hotel-item h4 {
+    margin: 0 0 5px;
+    font-size: 18px;
+    color: #444;
+}
+
+.hotel-item p {
+    margin: 0 0 10px;
+    color: #666;
+}
+
+/* Botón */
+.hotel-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #d4af37;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.hotel-btn:hover {
+    background: #b8932e;
+}
+
+
+
+
+
+
+
+
+
+/* Ocultar elementos */
+.hidden {
+    display: none;
+}
+
+/* Contenedor principal */
+.hoteles-box {
+    margin-top: 25px;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    animation: fadeIn 0.4s ease;
+}
+
+/* Título */
+.hoteles-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 10px;
+    text-align: left;
+    letter-spacing: 0.5px;
+}
+
+/* Descripción */
+.hoteles-desc {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5em;
+}
+
+/* Tarjeta de cada hotel */
+.hotel-item {
+    background: #fafafa;
+    border: 1px solid #eaeaea;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    transition: 0.25s ease;
+}
+
+/* Efecto hover */
+.hotel-item:hover {
+    background: #fff7e0;
+    border-color: #d4af37;
+    transform: translateY(-2px);
+}
+
+/* Nombre del hotel */
+.hotel-item h4 {
+    font-size: 18px;
+    margin: 0 0 6px;
+    color: #333;
+    font-family: 'Lora', serif;
+}
+
+/* Descripción del hotel */
+.hotel-item p {
+    margin: 0 0 12px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Botón de WhatsApp */
+.hotel-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #d4af37;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.25s ease;
+    letter-spacing: 0.3px;
+}
+
+.hotel-btn:hover {
+    background: #b8932e;
+}
+
+/* Animación */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+}
