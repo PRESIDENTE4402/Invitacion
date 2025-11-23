@@ -901,12 +901,13 @@ section:first-of-type::after{ display: none !important; height: 0 !important; ba
   }
 
   /* FOOTER */
-  .footer {
+  /* .footer {
     padding: 40px 15px;
+    color: #000;
   }
   .footer .names {
     font-size: 2rem;
-  }
+  } */
 }
 /* ==== Overrides elegantes y accesibles ==== */
 :root{
@@ -1021,5 +1022,81 @@ html{scroll-behavior:smooth;text-rendering:optimizeLegibility}
   font-size: 1.4rem;
   letter-spacing: 2px;
   margin-top: 50px;
+}
+
+/* ====================== TARJETA FINAL DE CIERRE ====================== */
+.final-card-section {
+  padding: 80px 20px 100px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.final-card {
+  max-width: 420px;
+  width: 100%;
+  background: linear-gradient(135deg, #fdfbfb 0%, #f8f5f0 100%);
+  border-radius: 28px;
+  padding: 50px 30px;
+  box-shadow: 
+    0 20px 40px rgba(0,0,0,0.08),
+    0 0 30px rgba(227, 193, 124, 0.15);
+  border: 2px solid #e3c17c;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Detalle dorado sutil en los bordes */
+.final-card::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid #ffd700;
+  border-radius: 24px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.final-card-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.closing-line {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.2rem;
+  color: #8b6b2e;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.final-names {
+  font-family: 'Parisienne', cursive;
+  font-size: clamp(3.8rem, 12vw, 5.5rem);
+  color: #c7a767;
+  margin: 10px 0;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.final-date {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: #8b6b2e;
+  letter-spacing: 3px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.heart-decoration {
+  margin-top: 30px;
+  font-size: 2rem;
+  color: #e3c17c;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
