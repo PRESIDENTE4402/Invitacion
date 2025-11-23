@@ -1,0 +1,455 @@
+:root {
+  --bg: #f7f3ea;
+  --card-bg: #ffffff;
+  --accent: #c7a767;
+  --accent-dark: #8b6b2e;
+  --text-main: #333333;
+  --text-muted: #777777;
+  --radius-card: 24px;
+  --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Lora", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #fff7e0, #f2eadf 45%, #eddcc7 80%);
+  color: var(--text-main);
+}
+
+/* Layout principal */
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--card-bg);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+  padding: 28px 22px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* pequeño borde interior dorado */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: calc(var(--radius-card) - 6px);
+  border: 1px solid rgba(199, 167, 103, 0.35);
+  pointer-events: none;
+}
+
+/* Títulos */
+.title-script {
+  font-family: "Great Vibes", cursive;
+  font-size: 2.7rem;
+  color: var(--accent-dark);
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+/* ===== Cards de selección (novia / novio) ===== */
+.rsvp-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.rsvp-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(199, 167, 103, 0.45);
+  padding: 14px 18px;
+  min-width: 220px;
+  max-width: 240px;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.rsvp-card h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+  color: var(--accent-dark);
+}
+
+.rsvp-card p {
+  font-size: 0.87rem;
+  color: var(--text-muted);
+}
+
+/* Estado hover / activo */
+.rsvp-card:hover,
+.rsvp-card.is-active {
+  background: #fdf7e6;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+
+/* ===== Formulario ===== */
+.rsvp-form {
+  margin-top: 10px;
+  text-align: left;
+}
+
+.rsvp-form.is-hidden {
+  display: none;
+}
+
+.rsvp-form-title {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
+.rsvp-form-title span {
+  font-weight: 600;
+  color: var(--accent-dark);
+}
+
+/* Campos */
+.field {
+  margin-bottom: 16px;
+}
+
+.field label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  color: var(--text-main);
+}
+
+.field select,
+.field textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid #cccccc;
+  outline: none;
+  background: #ffffff;
+  resize: vertical;
+}
+
+/* textarea con bordes suaves */
+.field textarea {
+  border-radius: 16px;
+  min-height: 70px;
+}
+
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(199, 167, 103, 0.26);
+}
+
+/* Botón principal */
+.btn-primary {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: var(--accent);
+  color: #000000;
+  font-weight: 700;
+  font-size: 0.96rem;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: #e1ce8d;
+  transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .card {
+    padding: 22px 16px 26px;
+  }
+
+  .title-script {
+    font-size: 2.3rem;
+  }
+
+  .rsvp-card {
+    min-width: 100%;
+  }
+}
+/* Autocomplete */
+.autocomplete {
+  position: relative;
+}
+
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 0;
+  margin: 4px 0 0;
+  list-style: none;
+  max-height: 160px;
+  overflow-y: auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  display: none;
+  z-index: 999;
+}
+
+.suggestions-list li {
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-bottom: 1px solid #efefef;
+}
+
+.suggestions-list li:last-child {
+  border-bottom: none;
+}
+
+.suggestions-list li:hover {
+  background: #f4ecd6;
+  color: #8b6b2e;
+  font-weight: 600;
+}
+/* ===== INPUT PRINCIPAL — AUTOCOMPLETE ===== */
+
+.autocomplete input {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 1rem;
+  font-family: "Lora", serif;
+  border-radius: 14px;
+  border: 2px solid #d8c69a;
+  background: #fffdf7;
+  outline: none;
+  color: #5a4a1f;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Hover */
+.autocomplete input:hover {
+  background: #fff9e8;
+  border-color: #c7a767;
+}
+
+/* Cuando escribe */
+.autocomplete input:focus {
+  border-color: #c7a767;
+  box-shadow: 0 0 0 3px rgba(199, 167, 103, 0.35);
+}
+
+/* Placeholder doradito suave */
+.autocomplete input::placeholder {
+  color: #b9a77a;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+/* ===== LISTA DE SUGERENCIAS ===== */
+
+.suggestions-list {
+  position: absolute;
+  top: 102%;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid rgba(199, 167, 103, 0.35);
+  border-radius: 14px;
+  padding: 0;
+  margin: 4px 0 0;
+  list-style: none;
+  max-height: 180px;
+  overflow-y: auto;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  display: none;
+  z-index: 999;
+}
+
+/* Cada opción */
+.suggestions-list li {
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-family: "Lora", serif;
+  border-bottom: 1px solid #f0e9d6;
+  font-size: 0.95rem;
+  color: #654f1e;
+}
+
+/* Última sugerencia sin borde */
+.suggestions-list li:last-child {
+  border-bottom: none;
+}
+
+/* Hover — estilo dorado suave */
+.suggestions-list li:hover {
+  background: #fff4d6;
+  color: #8b6b2e;
+  font-weight: 600;
+}
+
+
+/* ===== MENSAJE DE NOMBRE NO ENCONTRADO ===== */
+
+.not-found {
+  background: #fffdf7;
+  border: 1px solid #e4d7b2;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  text-align: center;
+  margin-top: 15px;
+  font-family: "Lora", serif;
+  color: #5a4a1f;
+  display: none;
+}
+
+.not-found p {
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.notfound-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.nf-btn {
+  padding: 10px 18px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: 0.25s ease;
+  color: #fff;
+}
+
+.nf-btn.novia {
+  background: #d8b46a;
+}
+
+.nf-btn.novia:hover {
+  background: #c29d53;
+}
+
+.nf-btn.novio {
+  background: #8b6b2e;
+}
+
+.nf-btn.novio:hover {
+  background: #5d471d;
+}
+
+/* Para mostrar y ocultar dinámicamente */
+.hidden {
+  display: none !important;
+}
+/* ===== MODAL ELEGANTE ===== */
+
+.nice-alert {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.nice-alert.hidden {
+  display: none;
+}
+
+.nice-alert-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+}
+
+.nice-alert-box {
+  position: relative;
+  background: #fff;
+  padding: 28px 30px;
+  border-radius: 18px;
+  max-width: 340px;
+  width: 90%;
+  text-align: center;
+  font-family: "Amiri", serif;
+  color: #444;
+  z-index: 2;
+  animation: fadeInUp .35s ease-out;
+  border: 2px solid #c7a767;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.nice-alert-box h3 {
+  font-family: "Amiri", sans-serif;
+  font-size: 2rem;
+  color: #c7a767;
+  margin-bottom: 8px;
+}
+
+.nice-alert-box p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.nice-alert-btn {
+  background: #c7a767;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.nice-alert-btn:hover {
+  background: #aa8e45;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Confirmación de asistencia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style_formulario.css" />
+    <!-- Google Fonts opcionales -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Lora&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <main class="page">
+        <section class="card">
+            <h1 class="title-script">Confirmación de asistencia</h1>
+            <p class="subtitle">Por favor indícanos de parte de quién vienes.</p>
+
+            <!-- CARDS NOVIA / NOVIO -->
+            <div class="rsvp-cards">
+                <button type="button" class="rsvp-card" data-side="novia">
+                    <h3>Invitado de la novia</h3>
+                    <p>Familia y amigos de la novia</p>
+                </button>
+
+                <button type="button" class="rsvp-card" data-side="novio">
+                    <h3>Invitado del novio</h3>
+                    <p>Familia y amigos del novio</p>
+                </button>
+            </div>
+
+            <!-- FORMULARIO (INICIALMENTE OCULTO) -->
+            <form id="rsvpForm" class="rsvp-form is-hidden">
+                <p class="rsvp-form-title">
+                    Estás confirmando como <span id="selectedSideLabel"></span>
+                </p>
+
+                <!-- guarda si viene de la novia o del novio -->
+                <input type="hidden" id="sideHidden" name="side" />
+
+                <div class="field autocomplete">
+                    <label for="guestName">Escribe tu nombre</label>
+                    <input type="text" id="nombreInput" name="nombreInput" autocomplete="off"
+                        placeholder="Empieza a escribir tu nombre…">
+                    <ul id="suggestions" class="suggestions-list"></ul>
+                </div>
+                <!-- Caja que aparece cuando NO se encuentra el nombre -->
+                <div id="notFoundBox" class="not-found hidden">
+                    <p>No encontramos tu nombre en la lista.<br>
+                        Por favor contacta a:</p>
+
+                    <div class="notfound-buttons">
+                        <a href="https://wa.me/50258223192?" target="_blank" class="nf-btn novia">La Novia 💛</a>
+                        <a href="https://wa.me/50233970345?" target="_blank" class="nf-btn novio">El Novio 🤵</a>
+                    </div>
+                </div>
+
+
+
+                <div class="field">
+                    <label for="extraInfo">Mensaje (opcional)</label>
+                    <textarea id="extraInfo" name="extraInfo" rows="3"
+                        placeholder="Ej. Acompañaré solo / Llevaré a mis hijos / Alguna aclaración especial"></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    Confirmar asistencia
+                </button>
+            </form>
+        </section>
+    </main>
+<!-- ⚠️ MODAL ELEGANTE DE CONFIRMACIÓN -->
+<div id="niceAlert" class="nice-alert hidden">
+    <div class="nice-alert-backdrop"></div>
+
+    <div class="nice-alert-box">
+        <h3 id="niceAlertTitle">¡Gracias!</h3>
+        <p id="niceAlertMessage">Tu confirmación fue recibida.</p>
+
+        <button id="niceAlertBtn" class="nice-alert-btn">Aceptar</button>
+    </div>
+</div>
+
+    <!-- JS -->
+ <script>
+document.addEventListener("DOMContentLoaded", function () {
+  // ============================
+  // 1) LISTAS DE INVITADOS
+  // ============================
+  const invitados = {
+    novia: [
+      "ESMERALDA DE CABALLEROS",
+      "BYRON GONZÁLEZ",
+      "FREDY GONZÁLEZ",
+      "LUIS GONZÁLEZ"
+      // agrega más aquí...
+    ],
+    novio: [
+      "ARMANDO RODRÍGUEZ",
+      "YOSELIN CASTILLO",
+      "LUIS FERNANDO CASTILLO",
+      "LOURDES CASTILLO"
+      // agrega más aquí...
+    ]
+  };
+
+  // ============================
+  // 2) ELEMENTOS DEL DOM
+  // ============================
+  const cards        = document.querySelectorAll(".rsvp-card");
+  const form         = document.getElementById("rsvpForm");
+  const guestInput   = document.getElementById("nombreInput");
+  const suggestionBox= document.getElementById("suggestions");
+  const notFoundBox  = document.getElementById("notFoundBox");
+  const sideHidden   = document.getElementById("sideHidden");
+  const sideLabel    = document.getElementById("selectedSideLabel");
+  const extraInfo    = document.getElementById("extraInfo");
+
+  // Lista actual (novia / novio)
+  let listaActiva = [];
+
+  // ============================
+  // 3) CLICK EN UNA CARD
+  // ============================
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+      const side = card.dataset.side; // "novia" o "novio"
+
+      // marcar visualmente
+      cards.forEach(c => c.classList.remove("is-active"));
+      card.classList.add("is-active");
+
+      // texto visible
+      sideLabel.textContent = side === "novia"
+        ? "invitado de la novia"
+        : "invitado del novio";
+
+      // guardar lado seleccionado
+      sideHidden.value = side;
+
+      // activar lista correspondiente
+      listaActiva = invitados[side] || [];
+
+      // limpiar input y sugerencias
+      guestInput.value = "";
+      suggestionBox.innerHTML = "";
+      suggestionBox.style.display = "none";
+      notFoundBox.classList.add("hidden");
+
+      // mostrar formulario
+      form.classList.remove("is-hidden");
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  // ============================
+  // 4) AUTOCOMPLETE DEL NOMBRE
+  // ============================
+  guestInput.addEventListener("input", function () {
+    const query = this.value.toLowerCase().trim();
+
+    // limpiar estado anterior
+    suggestionBox.innerHTML = "";
+    suggestionBox.style.display = "none";
+    notFoundBox.classList.add("hidden");
+
+    // si no escribió nada o no eligió lado aún
+    if (!query || listaActiva.length === 0) {
+      return;
+    }
+
+    const matches = listaActiva.filter(nombre =>
+      nombre.toLowerCase().includes(query)
+    );
+
+    if (matches.length > 0) {
+      // hay coincidencias → mostrar lista
+      matches.forEach(nombre => {
+        const li = document.createElement("li");
+        li.textContent = nombre;
+        li.addEventListener("click", () => {
+          guestInput.value = nombre;
+          suggestionBox.innerHTML = "";
+          suggestionBox.style.display = "none";
+        });
+        suggestionBox.appendChild(li);
+      });
+      suggestionBox.style.display = "block";
+    } else {
+      // no hay coincidencias → mostrar aviso de “no estás en la lista”
+      notFoundBox.classList.remove("hidden");
+    }
+  });
+
+  // Ocultar sugerencias si clic fuera del autocomplete
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".autocomplete")) {
+      suggestionBox.style.display = "none";
+    }
+  });
+
+  // ============================
+  // 5) ENVÍO DEL FORMULARIO
+  // ============================
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const lado    = sideHidden.value;
+    const invitado= guestInput.value.trim();
+    const mensaje = extraInfo.value.trim();
+
+    if (!lado) {
+      alert("Por favor selecciona si eres invitado de la novia o del novio.");
+      return;
+    }
+
+    if (!invitado) {
+      alert("Por favor escribe tu nombre.");
+      return;
+    }
+
+    // Verificar que el nombre esté realmente en la lista
+    const existe = listaActiva.some(
+      n => n.toLowerCase() === invitado.toLowerCase()
+    );
+
+    if (!existe) {
+      notFoundBox.classList.remove("hidden");
+      mostrarAlerta("Tu nombre no aparece en la lista. Por favor contacta a la novia o al novio 💛");
+      return;
+    }
+
+    // Aquí podrías hacer un fetch() para guardar la respuesta en tu servidor / Google Sheets
+    console.log("Lado:", lado);
+    console.log("Invitado:", invitado);
+    console.log("Mensaje:", mensaje);
+
+    mostrarAlerta(
+    "¡Gracias!",
+    "Tu asistencia ha sido confirmada, " + invitado + " 💛"
+);
+
+
+    // Reset visual
+    form.reset();
+    form.classList.add("is-hidden");
+    sideHidden.value = "";
+    sideLabel.textContent = "";
+    suggestionBox.innerHTML = "";
+    suggestionBox.style.display = "none";
+    notFoundBox.classList.add("hidden");
+    cards.forEach(c => c.classList.remove("is-active"));
+  });
+});
+
+
+// ===============================
+// FUNCIÓN PARA MOSTRAR ALERTA BONITA
+// ===============================
+function mostrarAlerta(titulo, mensaje) {
+    const alertBox = document.getElementById("niceAlert");
+    document.getElementById("niceAlertTitle").textContent = titulo;
+    document.getElementById("niceAlertMessage").textContent = mensaje;
+
+    alertBox.classList.remove("hidden");
+
+    document.getElementById("niceAlertBtn").onclick = () => {
+        alertBox.classList.add("hidden");
+    };
+}
+
+</script>
+
+
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // ============================
+            // 1) LISTAS DE INVITADOS
+            // ============================
+            // 👇 Cambia estos nombres por tus invitados reales
+            const invitados = {
+                novia: [
+                    "ESMERALDA DE CABALLEROS",
+                    "BYRON GONZÁLEZ",
+                    "FREDY GONZÁLEZ",
+                    "LUIS GONZÁLEZ",
+                ],
+                novio: [
+                    "ARMANDO RODRÍGUEZ",
+                    "YOSELIN CASTILLO",
+                    "LUIS FERNANDO CASTILLO",
+                    "LOURDES CASTILLO"
+                ]
+            };
+
+            // ============================
+            // 2) ELEMENTOS DEL DOM
+            // ============================
+            const cards = document.querySelectorAll(".rsvp-card");
+            const form = document.getElementById("rsvpForm");
+
+            const guestInput = document.getElementById("inputNombre");
+            const suggestionBox = document.getElementById("suggestions");
+
+            const sideHidden = document.getElementById("sideHidden");
+            const sideLabel = document.getElementById("selectedSideLabel");
+            const extraInfoInput = document.getElementById("extraInfo");
+
+            // Lista actual de invitados según el lado elegido
+            let listaActiva = [];
+
+            // ============================
+            // 3) CLICK EN UNA CARD
+            // ============================
+            cards.forEach(card => {
+                card.addEventListener("click", () => {
+                    const side = card.dataset.side; // "novia" o "novio"
+
+                    // Visual: resaltar card activa
+                    cards.forEach(c => c.classList.remove("is-active"));
+                    card.classList.add("is-active");
+
+                    // Texto de referencia
+                    sideLabel.textContent = side === "novia"
+                        ? "invitado de la novia"
+                        : "invitado del novio";
+
+                    // Guardar lado seleccionado
+                    sideHidden.value = side;
+
+                    // Activar lista adecuada
+                    listaActiva = invitados[side] || [];
+
+                    // Limpiar input y sugerencias
+                    guestInput.value = "";
+                    suggestionBox.innerHTML = "";
+                    suggestionBox.style.display = "none";
+
+                    // Mostrar formulario
+                    form.classList.remove("is-hidden");
+                    form.scrollIntoView({ behavior: "smooth", block: "start" });
+                });
+            });
+
+            // ============================
+            // 4) AUTOCOMPLETE DE NOMBRE
+            // ============================
+            guestInput.addEventListener("input", function () {
+                const query = this.value.toLowerCase().trim();
+                suggestionBox.innerHTML = "";
+
+                if (!query || listaActiva.length === 0) {
+                    suggestionBox.style.display = "none";
+                    return;
+                }
+
+                // Filtrar coincidencias
+                const matches = listaActiva.filter(nombre =>
+                    nombre.toLowerCase().includes(query)
+                );
+
+                if (matches.length === 0) {
+                    suggestionBox.style.display = "none";
+                    return;
+                }
+
+                // Construir lista de sugerencias
+                matches.forEach(nombre => {
+                    const li = document.createElement("li");
+                    li.textContent = nombre;
+                    li.addEventListener("click", () => {
+                        guestInput.value = nombre;           // Poner nombre en el input
+                        suggestionBox.style.display = "none";
+                    });
+                    suggestionBox.appendChild(li);
+                });
+
+                suggestionBox.style.display = "block";
+            });
+
+            // Ocultar sugerencias al hacer clic fuera
+            document.addEventListener("click", (e) => {
+                if (!e.target.closest(".autocomplete")) {
+                    suggestionBox.style.display = "none";
+                }
+            });
+
+            // ============================
+            // 5) ENVÍO DEL FORMULARIO
+            // ============================
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const lado = sideHidden.value;
+                const invitado = guestInput.value.trim();
+                const extraInfo = extraInfoInput ? extraInfoInput.value.trim() : "";
+
+                if (!lado || !invitado) {
+                    alert("Por favor selecciona si eres invitado de la novia o del novio y escribe tu nombre.");
+                    return;
+                }
+
+                // 👉 Aquí puedes cambiar esto por un fetch() a tu backend o Google Apps Script
+                console.log("Lado:", lado);
+                console.log("Invitado:", invitado);
+                console.log("Mensaje:", extraInfo);
+
+                alert("¡Gracias por confirmar, " + invitado + "! 💛");
+
+                // Reset visual
+                form.reset();
+                form.classList.add("is-hidden");
+                sideHidden.value = "";
+                sideLabel.textContent = "";
+                suggestionBox.innerHTML = "";
+                suggestionBox.style.display = "none";
+                cards.forEach(c => c.classList.remove("is-active"));
+            });
+        });
+    </script> -->
+
+</body>
+
+</html>
