@@ -81,7 +81,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#ccca8e;color:#fff}
 .padres .parent-list{font-family: 'Lora', serif;color:#333;line-height:1.4}
 .padres-couple{font-family:'Parisienne',cursive;font-size:clamp(1.5rem,4vw,3rem);color:#8b6b2e;margin:6px 0}
 .padres-couple .and{margin:0 8px;font-family:'Lora',serif;font-size:1.1rem}
-.padres-invite{font-family:'Lora',serif;color:#fff;margin-top:8px}
+.padres-invite{font-family:'Lora',serif;color:#080808;margin-top:8px}
 
 .story-photo img {
   width: 100%;
@@ -95,7 +95,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#ccca8e;color:#fff}
   border: 1px solid #e5ecf5;
   padding: 40px 50px;
   line-height: 1.8;
-  color: #fff;
+  color: #121212;
   font-size: 2.5rem;
   font-family:'Great Vibes', cursive;
   text-align: center; 
@@ -108,47 +108,54 @@ body{font-family:Inter,system-ui,sans-serif;background:#ccca8e;color:#fff}
 
 
 /* SAVE THE DATE */
+/* SAVE THE DATE — SIN franja negra/gris/negro en la parte superior */
+/* SAVE THE DATE – Todo pegado a la parte inferior (solo móvil) */
 .savethedate {
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;   /* ← esto lo pega todo abajo */
   text-align: center;
   color: #fff;
   overflow: hidden;
 }
 
+/* Foto de fondo limpia y sin movimiento */
 .std-bg {
   position: absolute;
   inset: 0;
-  background: url("../assets/mariachis.jpeg") center/cover no-repeat;
+  background: url("../assets/foto5.jpg") center/cover no-repeat;
+  /* sin fixed → no se mueve al hacer scroll */
 }
 
-.savethedate::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-}
+/* Quitamos cualquier overlay negro o gris */
+.savethedate::before,
+.savethedate::after { display: none !important; }
 
+/* Contenido con espacio bonito desde abajo */
 .std-inner {
   position: relative;
   z-index: 2;
-  padding: 40px 20px;
+  padding: 40px 20px 60px;   /* más espacio abajo para que no quede pegado al borde */
+  width: 100%;
 }
 
 .std-title {
-  font-family: 'Great Vibes', cursive;
+  /* font-family: 'Great Vibes', cursive;
+  font-size: 1.4rem;
+  margin-bottom: 10px; */
+  font-family: 'Great Vibes', sans-serif;
   font-size: clamp(2.5rem, 6vw, 4rem);
-  color: #e3c17c; /* Dorado */
-  margin-bottom: 10px;
+  letter-spacing: 2px;
+  color: #e3c17c; 
+  margin-top: 50px;
 }
 
 .std-date {
   font-size: 1.4rem;
   margin-bottom: 30px;
-  color: #f2d9a6;
+   color: #e3c17c; 
 }
 
 .countdown {
