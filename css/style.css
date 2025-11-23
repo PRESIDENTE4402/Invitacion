@@ -896,8 +896,9 @@ section:first-of-type::after{ display: none !important; height: 0 !important; ba
     font-size: 1.5rem;
   }
   .rsvp-btn {
-    padding: 12px 24px;
-    font-size: 0.9rem;
+    font-family: "Noto Serif", sans-serif;
+    padding: 10px 10px;
+    font-size: 1.2rem;
   }
 
   /* FOOTER */
