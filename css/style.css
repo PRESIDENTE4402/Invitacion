@@ -179,15 +179,11 @@ body{font-family:Inter,system-ui,sans-serif;background:#ccca8e;color:#fff}
   font-family: 'Great Vibes', sans-serif;
   font-size: clamp(2.5rem, 6vw, 4rem);
   letter-spacing: 8px;
-  color: #dec955;
+  color: #885d08;
   margin-top: 50px;
 
   /* ⭐ BRILLO ELEGANTE */
-  text-shadow:
-    0 0 4px rgba(255, 245, 153, 0.75),
-    0 0 10px rgba(255, 230, 120, 0.55),
-    0 0 18px rgba(255, 215, 80, 0.35),
-    0 0 28px rgba(255, 210, 60, 0.25);
+  
 }
 
 
@@ -197,12 +193,9 @@ body{font-family:Inter,system-ui,sans-serif;background:#ccca8e;color:#fff}
   margin-bottom: 30px;
   letter-spacing: 2.5px;
   margin-top: 20px;
-  color: #dec955;
+  color: #885d08;
 
-  /* ✨ BRILLO SUAVE */
-  text-shadow:
-    0 0 3px rgba(255, 245, 153, 0.6),
-    0 0 8px rgba(255, 230, 120, 0.4);
+  
 }
 
 .countdown {
