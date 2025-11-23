@@ -57,13 +57,24 @@
                     </div>
                 </div>
 
+                <div id="guestCountBox" class="guest-count hidden">
+                    <label>Pase unicamente para</label>
+
+                    <div class="counter">
+                        <button type="button" id="btnMinus" class="btn-counter">−</button>
+                        <input type="number" id="guestCount" value="1" readonly>
+                        <button type="button" id="btnPlus" class="btn-counter disabled" disabled>+</button>
+                    </div>
+
+                    <p id="guestLimitLabel" class="guest-limit"></p>
+                </div>
 
 
-                <div class="field">
+                <!-- <div class="field">
                     <label for="extraInfo">Mensaje (opcional)</label>
                     <textarea id="extraInfo" name="extraInfo" rows="3"
                         placeholder="Ej. Acompañaré solo / Llevaré a mis hijos / Alguna aclaración especial"></textarea>
-                </div>
+                </div> -->
 
                 <button type="submit" class="btn-primary">
                     Confirmar asistencia
@@ -71,227 +82,36 @@
             </form>
         </section>
     </main>
-<!-- ⚠️ MODAL ELEGANTE DE CONFIRMACIÓN -->
-<div id="niceAlert" class="nice-alert hidden">
-    <div class="nice-alert-backdrop"></div>
+    <!-- ⚠️ MODAL ELEGANTE DE CONFIRMACIÓN -->
+    <div id="niceAlert" class="nice-alert hidden">
+        <div class="nice-alert-backdrop"></div>
 
-    <div class="nice-alert-box">
-        <h3 id="niceAlertTitle">¡Gracias!</h3>
-        <p id="niceAlertMessage">Tu confirmación fue recibida.</p>
+        <div class="nice-alert-box">
+            <h3 id="niceAlertTitle">¡Gracias!</h3>
+            <p id="niceAlertMessage">Tu confirmación fue recibida.</p>
 
-        <button id="niceAlertBtn" class="nice-alert-btn">Aceptar</button>
+            <button id="niceAlertBtn" class="nice-alert-btn">Aceptar</button>
+        </div>
     </div>
-</div>
 
     <!-- JS -->
- <script>
-document.addEventListener("DOMContentLoaded", function () {
-  // ============================
-  // 1) LISTAS DE INVITADOS
-  // ============================
-  const invitados = {
-    novia: [
-      "ESMERALDA DE CABALLEROS",
-      "BYRON GONZÁLEZ",
-      "FREDY GONZÁLEZ",
-      "LUIS GONZÁLEZ"
-      // agrega más aquí...
-    ],
-    novio: [
-      "ARMANDO RODRÍGUEZ",
-      "YOSELIN CASTILLO",
-      "LUIS FERNANDO CASTILLO",
-      "LOURDES CASTILLO"
-      // agrega más aquí...
-    ]
-  };
-
-  // ============================
-  // 2) ELEMENTOS DEL DOM
-  // ============================
-  const cards        = document.querySelectorAll(".rsvp-card");
-  const form         = document.getElementById("rsvpForm");
-  const guestInput   = document.getElementById("nombreInput");
-  const suggestionBox= document.getElementById("suggestions");
-  const notFoundBox  = document.getElementById("notFoundBox");
-  const sideHidden   = document.getElementById("sideHidden");
-  const sideLabel    = document.getElementById("selectedSideLabel");
-  const extraInfo    = document.getElementById("extraInfo");
-
-  // Lista actual (novia / novio)
-  let listaActiva = [];
-
-  // ============================
-  // 3) CLICK EN UNA CARD
-  // ============================
-  cards.forEach(card => {
-    card.addEventListener("click", () => {
-      const side = card.dataset.side; // "novia" o "novio"
-
-      // marcar visualmente
-      cards.forEach(c => c.classList.remove("is-active"));
-      card.classList.add("is-active");
-
-      // texto visible
-      sideLabel.textContent = side === "novia"
-        ? "invitado de la novia"
-        : "invitado del novio";
-
-      // guardar lado seleccionado
-      sideHidden.value = side;
-
-      // activar lista correspondiente
-      listaActiva = invitados[side] || [];
-
-      // limpiar input y sugerencias
-      guestInput.value = "";
-      suggestionBox.innerHTML = "";
-      suggestionBox.style.display = "none";
-      notFoundBox.classList.add("hidden");
-
-      // mostrar formulario
-      form.classList.remove("is-hidden");
-      form.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  });
-
-  // ============================
-  // 4) AUTOCOMPLETE DEL NOMBRE
-  // ============================
-  guestInput.addEventListener("input", function () {
-    const query = this.value.toLowerCase().trim();
-
-    // limpiar estado anterior
-    suggestionBox.innerHTML = "";
-    suggestionBox.style.display = "none";
-    notFoundBox.classList.add("hidden");
-
-    // si no escribió nada o no eligió lado aún
-    if (!query || listaActiva.length === 0) {
-      return;
-    }
-
-    const matches = listaActiva.filter(nombre =>
-      nombre.toLowerCase().includes(query)
-    );
-
-    if (matches.length > 0) {
-      // hay coincidencias → mostrar lista
-      matches.forEach(nombre => {
-        const li = document.createElement("li");
-        li.textContent = nombre;
-        li.addEventListener("click", () => {
-          guestInput.value = nombre;
-          suggestionBox.innerHTML = "";
-          suggestionBox.style.display = "none";
-        });
-        suggestionBox.appendChild(li);
-      });
-      suggestionBox.style.display = "block";
-    } else {
-      // no hay coincidencias → mostrar aviso de “no estás en la lista”
-      notFoundBox.classList.remove("hidden");
-    }
-  });
-
-  // Ocultar sugerencias si clic fuera del autocomplete
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".autocomplete")) {
-      suggestionBox.style.display = "none";
-    }
-  });
-
-  // ============================
-  // 5) ENVÍO DEL FORMULARIO
-  // ============================
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const lado    = sideHidden.value;
-    const invitado= guestInput.value.trim();
-    const mensaje = extraInfo.value.trim();
-
-    if (!lado) {
-      alert("Por favor selecciona si eres invitado de la novia o del novio.");
-      return;
-    }
-
-    if (!invitado) {
-      alert("Por favor escribe tu nombre.");
-      return;
-    }
-
-    // Verificar que el nombre esté realmente en la lista
-    const existe = listaActiva.some(
-      n => n.toLowerCase() === invitado.toLowerCase()
-    );
-
-    if (!existe) {
-      notFoundBox.classList.remove("hidden");
-      mostrarAlerta("Tu nombre no aparece en la lista. Por favor contacta a la novia o al novio 💛");
-      return;
-    }
-
-    // Aquí podrías hacer un fetch() para guardar la respuesta en tu servidor / Google Sheets
-    console.log("Lado:", lado);
-    console.log("Invitado:", invitado);
-    console.log("Mensaje:", mensaje);
-
-    mostrarAlerta(
-    "¡Gracias!",
-    "Tu asistencia ha sido confirmada, " + invitado + " 💛"
-);
-
-
-    // Reset visual
-    form.reset();
-    form.classList.add("is-hidden");
-    sideHidden.value = "";
-    sideLabel.textContent = "";
-    suggestionBox.innerHTML = "";
-    suggestionBox.style.display = "none";
-    notFoundBox.classList.add("hidden");
-    cards.forEach(c => c.classList.remove("is-active"));
-  });
-});
-
-
-// ===============================
-// FUNCIÓN PARA MOSTRAR ALERTA BONITA
-// ===============================
-function mostrarAlerta(titulo, mensaje) {
-    const alertBox = document.getElementById("niceAlert");
-    document.getElementById("niceAlertTitle").textContent = titulo;
-    document.getElementById("niceAlertMessage").textContent = mensaje;
-
-    alertBox.classList.remove("hidden");
-
-    document.getElementById("niceAlertBtn").onclick = () => {
-        alertBox.classList.add("hidden");
-    };
-}
-
-</script>
-
-
-    <!-- <script>
+    <script>
         document.addEventListener("DOMContentLoaded", function () {
             // ============================
             // 1) LISTAS DE INVITADOS
             // ============================
-            // 👇 Cambia estos nombres por tus invitados reales
             const invitados = {
                 novia: [
-                    "ESMERALDA DE CABALLEROS",
-                    "BYRON GONZÁLEZ",
-                    "FREDY GONZÁLEZ",
-                    "LUIS GONZÁLEZ",
+                    { nombre: "ESMERALDA DE CABALLEROS", cantidad: 1 },
+                    { nombre: "BYRON GONZÁLEZ", cantidad: 2 },
+                    { nombre: "FREDY GONZÁLEZ", cantidad: 4 },
+                    { nombre: "LUIS GONZÁLEZ", cantidad: 3 }
                 ],
                 novio: [
-                    "ARMANDO RODRÍGUEZ",
-                    "YOSELIN CASTILLO",
-                    "LUIS FERNANDO CASTILLO",
-                    "LOURDES CASTILLO"
+                    { nombre: "ARMANDO RODRÍGUEZ", cantidad: 2 },
+                    { nombre: "YOSELIN CASTILLO", cantidad: 1 },
+                    { nombre: "LUIS FERNANDO CASTILLO", cantidad: 3 },
+                    { nombre: "LOURDES CASTILLO", cantidad: 5 }
                 ]
             };
 
@@ -300,16 +120,40 @@ function mostrarAlerta(titulo, mensaje) {
             // ============================
             const cards = document.querySelectorAll(".rsvp-card");
             const form = document.getElementById("rsvpForm");
-
-            const guestInput = document.getElementById("inputNombre");
+            const guestInput = document.getElementById("nombreInput");
             const suggestionBox = document.getElementById("suggestions");
-
+            const notFoundBox = document.getElementById("notFoundBox");
             const sideHidden = document.getElementById("sideHidden");
             const sideLabel = document.getElementById("selectedSideLabel");
-            const extraInfoInput = document.getElementById("extraInfo");
+            const extraInfo = document.getElementById("extraInfo");
+            const guestCountBox = document.getElementById("guestCountBox");
+            const guestCountInput = document.getElementById("guestCount");
 
-            // Lista actual de invitados según el lado elegido
+
+            // Si falta algo crítico, no seguimos para evitar errores
+            if (!form || !guestInput || !suggestionBox || !sideHidden || !sideLabel) {
+                console.error("Faltan elementos necesarios en el DOM para el formulario de RSVP.");
+                return;
+            }
+
+            // Lista actual (novia / novio)
             let listaActiva = [];
+            // Busca el invitado por el texto escrito y muestra la cantidad (si coincide exactamente)
+            function aplicarCantidadPorNombre() {
+                if (!guestInput || !listaActiva.length) return;
+
+                const nombreEscrito = guestInput.value.trim().toLowerCase();
+                if (!nombreEscrito) return;
+
+                const invitadoObj = listaActiva.find(inv =>
+                    inv.nombre.toLowerCase() === nombreEscrito
+                );
+
+                if (invitadoObj) {
+                    mostrarCantidad(invitadoObj.cantidad);
+                }
+            }
+
 
             // ============================
             // 3) CLICK EN UNA CARD
@@ -318,74 +162,87 @@ function mostrarAlerta(titulo, mensaje) {
                 card.addEventListener("click", () => {
                     const side = card.dataset.side; // "novia" o "novio"
 
-                    // Visual: resaltar card activa
+                    // marcar visualmente
                     cards.forEach(c => c.classList.remove("is-active"));
                     card.classList.add("is-active");
 
-                    // Texto de referencia
+                    // texto visible
                     sideLabel.textContent = side === "novia"
                         ? "invitado de la novia"
                         : "invitado del novio";
 
-                    // Guardar lado seleccionado
+                    // guardar lado seleccionado
                     sideHidden.value = side;
 
-                    // Activar lista adecuada
+                    // activar lista correspondiente
                     listaActiva = invitados[side] || [];
 
-                    // Limpiar input y sugerencias
+                    // limpiar input y sugerencias
                     guestInput.value = "";
                     suggestionBox.innerHTML = "";
                     suggestionBox.style.display = "none";
+                    if (notFoundBox) notFoundBox.classList.add("hidden");
+                    if (guestCountBox) guestCountBox.classList.add("hidden");
 
-                    // Mostrar formulario
+                    // mostrar formulario
                     form.classList.remove("is-hidden");
                     form.scrollIntoView({ behavior: "smooth", block: "start" });
                 });
             });
 
             // ============================
-            // 4) AUTOCOMPLETE DE NOMBRE
+            // 4) AUTOCOMPLETE DEL NOMBRE
             // ============================
             guestInput.addEventListener("input", function () {
                 const query = this.value.toLowerCase().trim();
                 suggestionBox.innerHTML = "";
+                suggestionBox.style.display = "none";
+                if (notFoundBox) notFoundBox.classList.add("hidden");
 
                 if (!query || listaActiva.length === 0) {
-                    suggestionBox.style.display = "none";
                     return;
                 }
 
-                // Filtrar coincidencias
-                const matches = listaActiva.filter(nombre =>
-                    nombre.toLowerCase().includes(query)
+                // Filtrar por nombre del objeto
+                const matches = listaActiva.filter(invitado =>
+                    invitado.nombre.toLowerCase().includes(query)
                 );
 
                 if (matches.length === 0) {
-                    suggestionBox.style.display = "none";
+                    // si quieres mostrar el aviso de "no estás en la lista" mientras escribe,
+                    // descomenta la siguiente línea:
+                    // if (notFoundBox) notFoundBox.classList.remove("hidden");
                     return;
                 }
 
-                // Construir lista de sugerencias
-                matches.forEach(nombre => {
+                matches.forEach(invitado => {
                     const li = document.createElement("li");
-                    li.textContent = nombre;
+                    li.textContent = invitado.nombre;
+
                     li.addEventListener("click", () => {
-                        guestInput.value = nombre;           // Poner nombre en el input
+                        guestInput.value = invitado.nombre;
+                        suggestionBox.innerHTML = "";
                         suggestionBox.style.display = "none";
+
+                        // MOSTRAR CANTIDAD (contador que solo puede disminuir)
+                        mostrarCantidad(invitado.cantidad);
                     });
+
                     suggestionBox.appendChild(li);
                 });
 
                 suggestionBox.style.display = "block";
             });
 
-            // Ocultar sugerencias al hacer clic fuera
+            // Ocultar sugerencias si clic fuera del autocomplete
             document.addEventListener("click", (e) => {
                 if (!e.target.closest(".autocomplete")) {
                     suggestionBox.style.display = "none";
                 }
             });
+            // Cuando el usuario termina de escribir y sale del campo, intentamos aplicar la cantidad
+            guestInput.addEventListener("blur", aplicarCantidadPorNombre);
+
 
             // ============================
             // 5) ENVÍO DEL FORMULARIO
@@ -393,21 +250,97 @@ function mostrarAlerta(titulo, mensaje) {
             form.addEventListener("submit", function (e) {
                 e.preventDefault();
 
-                const lado = sideHidden.value;
-                const invitado = guestInput.value.trim();
-                const extraInfo = extraInfoInput ? extraInfoInput.value.trim() : "";
+                const lado = sideHidden.value || "";
+                const invitado = guestInput.value ? guestInput.value.trim() : "";
+                const mensaje = extraInfo && extraInfo.value
+                    ? extraInfo.value.trim()
+                    : "";
 
-                if (!lado || !invitado) {
-                    alert("Por favor selecciona si eres invitado de la novia o del novio y escribe tu nombre.");
+                if (!lado) {
+                    mostrarAlerta("Falta información", "Por favor selecciona si eres invitado de la novia o del novio.");
                     return;
                 }
 
-                // 👉 Aquí puedes cambiar esto por un fetch() a tu backend o Google Apps Script
+                if (!invitado) {
+                    mostrarAlerta("Falta tu nombre", "Por favor escribe tu nombre.");
+                    return;
+                }
+
+                // Verificar que el nombre esté realmente en la lista
+                // Buscar el invitado en la lista (objeto con nombre + cantidad)
+                const invitadoObj = listaActiva.find(
+                    inv => inv.nombre.toLowerCase() === invitado.toLowerCase()
+                );
+
+                if (!invitadoObj) {
+                    if (notFoundBox) notFoundBox.classList.remove("hidden");
+                    mostrarAlerta(
+                        "Nombre no encontrado",
+                        "Tu nombre no aparece en la lista. Por favor contacta a la novia o al novio 💛"
+                    );
+                    return;
+                }
+
+                // Nos aseguramos de que la cantidad esté aplicada aunque no haya clic en la sugerencia
+                // Si la caja de cantidad nunca se mostró (por ejemplo, escribió el nombre y no salió del input),
+                // la mostramos por lo menos una vez con el máximo permitido
+
+
+                if (guestCountBox && guestCountBox.classList.contains("hidden")) {
+                    mostrarCantidad(invitadoObj.cantidad);
+                }
+
+                // Tomamos la cantidad que el usuario dejó seleccionada (si existe el input)
+                let cantidadFinal = invitadoObj.cantidad; // valor por defecto
+
+                if (guestCountInput && !guestCountBox.classList.contains("hidden")) {
+                    const parsed = parseInt(guestCountInput.value, 10);
+                    if (!isNaN(parsed) && parsed >= 1 && parsed <= invitadoObj.cantidad) {
+                        cantidadFinal = parsed;
+                    }
+                }
+
+                // Aquí podrías hacer un fetch() para guardar la respuesta en tu servidor / Google Sheets
                 console.log("Lado:", lado);
                 console.log("Invitado:", invitado);
-                console.log("Mensaje:", extraInfo);
+                console.log("Cantidad seleccionada:", cantidadFinal);
+                console.log("Mensaje:", mensaje);
 
-                alert("¡Gracias por confirmar, " + invitado + "! 💛");
+                // Enviar a Google Sheets
+                // Enviar a Google Sheets SIN JSON, como formulario
+                fetch("https://script.google.com/macros/s/AKfycbyIOnkbahQ_yqNA7csFIJNGv5mnwPHhY82hSLPIjQrUcIajzitUTAQtwHpcsbk0mts7Cw/exec", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams({
+                        lado: lado,
+                        nombre: invitado,
+                        cantidad: cantidadFinal,
+                        mensaje: mensaje
+                    })
+                })
+                    .then(r => r.text())
+                    .then(result => {
+                        if (result.trim() === "ok") {
+                            console.log("¡Confirmación enviada con éxito! Gracias por confirmar ❤️");
+                        } else {
+                            console.log("Hubo un pequeño error: " + result);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        console.log("Error de conexión. Prueba con WhatsApp por favor.");
+                    });
+
+
+
+
+                mostrarAlerta(
+                    "¡Gracias!",
+                    "Tu asistencia ha sido confirmada, " + invitado + " 💛"
+                );
+                enviarWhatsApp(lado, invitado, cantidadFinal);
 
                 // Reset visual
                 form.reset();
@@ -416,10 +349,95 @@ function mostrarAlerta(titulo, mensaje) {
                 sideLabel.textContent = "";
                 suggestionBox.innerHTML = "";
                 suggestionBox.style.display = "none";
+                if (notFoundBox) notFoundBox.classList.add("hidden");
+                if (guestCountBox) guestCountBox.classList.add("hidden");
                 cards.forEach(c => c.classList.remove("is-active"));
             });
         });
-    </script> -->
+
+
+        // ===============================
+        // FUNCIÓN PARA MOSTRAR ALERTA BONITA
+        // ===============================
+        function mostrarAlerta(titulo, mensaje) {
+            const alertBox = document.getElementById("niceAlert");
+            const titleEl = document.getElementById("niceAlertTitle");
+            const messageEl = document.getElementById("niceAlertMessage");
+            const buttonEl = document.getElementById("niceAlertBtn");
+
+            if (!alertBox || !titleEl || !messageEl || !buttonEl) {
+                // fallback si el modal no existe
+                console.warn("No se encontró el modal de alerta bonita, usando alert() clásico.");
+                alert(titulo + "\n\n" + mensaje);
+                return;
+            }
+
+            titleEl.textContent = titulo;
+            messageEl.textContent = mensaje;
+
+            alertBox.classList.remove("hidden");
+
+            buttonEl.onclick = () => {
+                alertBox.classList.add("hidden");
+            };
+        }
+
+        const WHATSAPP_NOVIA = "50258223192";  // ya lo tienes en los links
+        const WHATSAPP_NOVIO = "50233970345";
+
+        function enviarWhatsApp(lado, invitado, cantidad) {
+            const telefono = lado === "novia" ? WHATSAPP_NOVIA : WHATSAPP_NOVIO;
+
+            const texto = `Hola, soy ${invitado}. 
+            Confirmo mi asistencia como invitado de la ${lado === "novia" ? "novia" : "novio"} 
+                para ${cantidad} ${cantidad === 1 ? "persona" : "personas"}.`;
+
+            const url = `https://wa.me/${telefono}?text=${encodeURIComponent(texto)}`;
+            window.open(url, "_blank");
+        }
+
+        // ===============================
+        // FUNCIÓN PARA MOSTRAR Y CONTROLAR CANTIDAD
+        // ===============================
+        function mostrarCantidad(maxCantidad) {
+            const box = document.getElementById("guestCountBox");
+            const guestCount = document.getElementById("guestCount");
+            const minus = document.getElementById("btnMinus");
+            const plus = document.getElementById("btnPlus");
+            const limitLabel = document.getElementById("guestLimitLabel");
+
+            if (!box || !guestCount || !minus || !plus || !limitLabel) {
+                console.warn("Faltan elementos para el contador de invitados.");
+                return;
+            }
+
+            // Setear valor inicial igual a la cantidad máxima
+            guestCount.value = maxCantidad;
+
+            // Mostrar texto
+            limitLabel.textContent =
+                maxCantidad === 1
+                    ? "Invitación individual."
+                    : " personas. Puedes disminuir, pero no aumentar más de " + maxCantidad + " personas.";
+
+            // mostrar caja
+            box.classList.remove("hidden");
+
+            // Configurar botón + (siempre deshabilitado)
+            plus.classList.add("disabled");
+            plus.disabled = true;
+
+            // Botón − solo deja bajar hasta 1
+            minus.onclick = () => {
+                let current = parseInt(guestCount.value, 10);
+                if (current > 1) {
+                    guestCount.value = current - 1;
+                }
+            };
+        }
+    </script>
+
+
 
 </body>
 

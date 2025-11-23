@@ -186,6 +186,7 @@ body {
   font-weight: 700;
   font-size: 0.96rem;
   letter-spacing: 0.03em;
+  margin-top: 50px;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
@@ -453,3 +454,93 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Contenedor general del contador */
+.guest-count {
+    background: #faf7f0;
+    border: 1px solid #e3c17c;
+    padding: 18px 20px;
+    border-radius: 14px;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    animation: fadeIn .4s ease;
+}
+
+.guest-count.hidden {
+    display: none;
+}
+
+.guest-count label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #8b6b2e;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Caja del contador */
+.counter {
+    margin: 15px auto 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Botones + y − */
+.btn-counter {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.6rem;
+    font-weight: 700;
+    cursor: pointer;
+    background: #e3c17c;
+    color: #fff;
+    transition: all .2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-counter:hover:not(.disabled) {
+    background: #cfad5d;
+    transform: translateY(-2px);
+}
+
+.btn-counter.disabled,
+.btn-counter:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Número */
+#guestCount {
+    width: 60px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    font-family: 'Lora', serif;
+    color: #8b6b2e;
+    background: #fff;
+    border: 1px solid #dec28d;
+    padding: 6px 0;
+    border-radius: 10px;
+}
+
+/* Límite mostrado abajo */
+.guest-limit {
+    margin-top: 6px;
+    font-family: 'Lora', serif;
+    color: #8b6b2e;
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+/* Animación suave de entrada */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
