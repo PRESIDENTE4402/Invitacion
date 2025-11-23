@@ -14,10 +14,16 @@
 </head>
 
 <body>
+
+  <div id="desktop-warning">
+  Este sitio está optimizado únicamente para dispositivos móviles 📱<br>
+  Por favor, ábrelo desde un celular.
+</div>
+
   <!-- PORTADA -->
   <div id="cover" class="cover">
     <div class="cover-inner">
-      <img src="assets/moña_y_mograma1.png" alt="Diego & Lesly" class="cover-image">
+      <img x-bind:class="cover-image" src="assets/moña_y_mograma1.png" alt="Diego & Lesly" class="cover-image">
     </div>
   </div>
 
@@ -100,7 +106,7 @@
           </div>
         </div>
         <p class="se_llevara">Recepción</p>
-        <div><img src="assets/recepcion.png" loading="lazy" width="150"></div>
+        <div><img src="assets/copas.png" loading="lazy" width="100"></div>
         <div class="event-info">
           <h4 class="event-place">Antiguo Restaurante "Hacienda Real"</h4>
           <p class="event-direccion">
@@ -156,11 +162,11 @@
     <!-- GALERÍA -->
     <section class="gallery">
       <div class="gallery-header">
-        <i class="fas fa-camera-retro"></i>
+        <div><img src="assets/recepcion.png" loading="lazy" width="150"></div>
         <h2>Nuestra historia en fotos</h2>
       </div>
       <div class="gallery-grid">
-        <a href="assets/principal2.jpg" class="small-top" target="_blank"><img src="assets/principal2.jpg" loading="lazy" alt=""></a>
+        <a href="assets/principal2.jpg" class="big-right" target="_blank"><img src="assets/principal2.jpg" loading="lazy" alt=""></a>
         <a href="assets/principal.jpg" class="big-left" target="_blank"><img src="assets/principal.jpg" loading="lazy" alt=""></a>
         <a href="assets/principal1.jpg" class="small-bottom" target="_blank"><img src="assets/principal1.jpg" loading="lazy" alt=""></a>
         <a href="assets/sin_resongar.jpg" class="big-right" target="_blank"><img src="assets/sin_resongar.jpg" loading="lazy" alt=""></a>
@@ -170,7 +176,7 @@
     <!-- RSVP -->
     <section class="rsvp" id="rsvp">
       <div class="rsvp-inner">
-        <i class="far fa-envelope rsvp-icon"></i>
+         <div><img src="assets/invitacion.png" loading="lazy" width="100"></div>
         <p class="rsvp-phrase">Estamos muy emocianados de compartir este día tan especial contigo queremos asegurarnos que tu lugar este reservado, así que nos encantaría saber si podrás acompañarmos por lo que te rogamos confirmar tu asistencia </p>
         <a class="rsvp-btn outline" href="https://wa.me/50233970345?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Diego%20y%20Lesly%20el%2020%20de%20diciembre%20de%202025%20%F0%9F%92%8D" target="_blank"><p>CLICK PARA CONFIRMAR ASISTENCIA</p>
         </a>
@@ -221,7 +227,7 @@
       document.getElementById("days").innerText = days;
       document.getElementById("hours").innerText = String(hours).padStart(2, '0');
       document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-      document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+      // document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
 
       if (distance < 0) {
         clearInterval(countdown);
@@ -254,5 +260,15 @@ END:VCALENDAR`.trim();
       URL.revokeObjectURL(url);
     });
   </script>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+
+  if (!isMobile) {
+    document.getElementById("desktop-warning").style.display = "block";
+  }
+});
+</script>
+
 </body>
 </html>
