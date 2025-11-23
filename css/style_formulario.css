@@ -140,6 +140,7 @@ body {
 /* Campos */
 .field {
   margin-bottom: 16px;
+  margin-top: 20px;
 }
 
 .field label {
@@ -186,7 +187,7 @@ body {
   font-weight: 700;
   font-size: 0.96rem;
   letter-spacing: 0.03em;
-  margin-top: 50px;
+  margin-top: 20px;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
@@ -763,6 +764,8 @@ body {
     letter-spacing: 0.3px;
 }
 
+
+
 .hotel-btn:hover {
     background: #b8932e;
 }
@@ -771,4 +774,57 @@ body {
 @keyframes fadeIn {
     from {opacity: 0; transform: translateY(10px);}
     to {opacity: 1; transform: translateY(0);}
+}
+
+
+
+.hotel-btn-call {
+    background: #555;
+}
+
+.hotel-btn-call:hover {
+    background: #333;
+}
+
+.hotel-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px; /* ← este crea espacios tanto verticales como horizontales */
+}
+
+.hotel-btn,
+.hotel-btn-call {
+    flex: 4 1 100%; /* en móvil: 100% de ancho → uno arriba del otro con gap */
+}
+
+/* Cualquier .hotel-btn que venga después de otra .hotel-btn
+   tendrá un margen arriba (separación vertical) */
+.hotel-item .hotel-btn + .hotel-btn {
+    margin-top: 8px;   /* prueba 8, 10 o 12 px si quieres más espacio */
+}
+
+
+@media (min-width: 480px) {
+    .hotel-btn,
+    .hotel-btn-call {
+        flex: 1 1 auto; /* desde pantallas medianas, vuelven a estar lado a lado */
+    }
+}
+
+
+.nota-importante {
+    background: #fff6d9;
+    border-left: 5px solid #d4af37;
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin: 20px 0;
+    font-size: 15px;
+    line-height: 1.4em;
+    color: #6a5d2b;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.nota-importante strong {
+    font-weight: 700;
+    color: #4a411b;
 }

@@ -76,15 +76,24 @@
                 <!-- ============================
      SECCIÓN DE HOTELES (OCULTA AL INICIO)
      ============================ -->
-                
 
 
 
-               <div class="field">
+
+                <div class="field">
                     <label for="extraInfo">Mensaje (opcional)</label>
                     <textarea id="extraInfo" name="extraInfo" rows="3"
-                        placeholder="Ahí estare(mos) para acompañarlos en ese evento tan especial"></textarea>
-                </div> 
+                        placeholder="¡Será un honor acompañarlos en su gran día!"></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    Confirmar asistencia
+                </button>
+
+                <div id="nota-importante" class="nota-importante hidden">
+                    <strong>Nota importante:</strong>
+                    Antes de reservar hospedaje, es indispensable que confirmes tu asistencia a la boda.
+                </div>
 
                 <div id="hotelesBox" class="hoteles-box hidden">
                     <h3 class="hoteles-title">Hoteles cercanos para reservar 🏨</h3>
@@ -94,11 +103,15 @@
                     </p>
 
                     <div class="hotel-item">
-                        <h4>Hotel Casa Real</h4>
-                        <p>A 3 minutos del evento — Habitaciones desde Q450.</p>
-                        <a class="hotel-btn" href="https://wa.me/50200000000" target="_blank">
+                        <h4>Hotel Los Delfines</h4>
+                        <p>A 5 minutos del evento — Habitaciones desde Q150 por pesona.</p>
+                        <a class="hotel-btn" href="https://wa.me/50245781878" target="_blank">
                             Reservar por WhatsApp
                         </a>
+                        <a class="hotel-btn hotel-btn-call" href="tel:+50245781878">
+                            Llamar al hotel
+                        </a>
+
                     </div>
 
                     <div class="hotel-item">
@@ -106,6 +119,10 @@
                         <p>A 5 minutos del evento — Habitaciones desde Q380.</p>
                         <a class="hotel-btn" href="https://wa.me/50200000000" target="_blank">
                             Reservar por WhatsApp
+                        </a>
+
+                        <a class="hotel-btn hotel-btn-call" href="tel:+50245781878">
+                            Llamar al hotel
                         </a>
                     </div>
 
@@ -115,12 +132,14 @@
                         <a class="hotel-btn" href="https://wa.me/50200000000" target="_blank">
                             Reservar por WhatsApp
                         </a>
+
+                        <a class="hotel-btn hotel-btn-call" href="tel:+50245781878">
+                            Llamar al hotel
+                        </a>
                     </div>
                 </div>
 
-                <button type="submit" class="btn-primary">
-                    Confirmar asistencia
-                </button>
+
             </form>
         </section>
     </main>
@@ -172,7 +191,7 @@
                     { nombre: "JOSE TOLEDO", cantidad: 1 },
                     { nombre: "DIEGO TOLEDO", cantidad: 1 },
                     { nombre: "OSWALDO FIGUEROA ", cantidad: 1 },
-                    { nombre: "JORGE GONZALEZ", cantidad: 2 },
+                    { nombre: "JORGE LUIS LÓPEZ", cantidad: 2 },
 
                     { nombre: "CARLOS CASTILLO", cantidad: 2 },
                     { nombre: "PEDRO CASTILLO", cantidad: 2 },
@@ -256,6 +275,7 @@
             const guestCountBox = document.getElementById("guestCountBox");
             const guestCountInput = document.getElementById("guestCount");
             const hotelesBox = document.getElementById("hotelesBox");
+            const nota_importante = document.getElementById("nota-importante");
 
 
             // Si falta algo crítico, no seguimos para evitar errores
@@ -280,6 +300,7 @@
                 if (invitadoObj) {
                     mostrarCantidad(invitadoObj.cantidad);
                     if (hotelesBox) hotelesBox.classList.remove("hidden");
+                    if (nota_importante) nota_importante.classList.remove("hidden");                    
                 }
             }
 
@@ -313,6 +334,7 @@
                     if (notFoundBox) notFoundBox.classList.add("hidden");
                     if (guestCountBox) guestCountBox.classList.add("hidden");
                     if (hotelesBox) hotelesBox.classList.add("hidden");
+                    if (nota_importante) nota_importante.classList.add("hidden");
 
 
                     // mostrar formulario
@@ -358,6 +380,7 @@
                         // MOSTRAR CANTIDAD (contador que solo puede disminuir)
                         mostrarCantidad(invitado.cantidad);
                         if (hotelesBox) hotelesBox.classList.remove("hidden");
+                        if (nota_importante) nota_importante.classList.remove("hidden");
                     });
 
                     suggestionBox.appendChild(li);
@@ -454,7 +477,7 @@
                 })
                     .then(r => r.text())
                     .then(result => {
-                        if (result.trim() === "ok") {
+                        if (result.trim() === "ok_actualizado" || result.trim() === "ok_nuevo") {
                             console.log("¡Confirmación enviada con éxito! Gracias por confirmar ❤️");
                         } else {
                             console.log("Hubo un pequeño error: " + result);
@@ -484,6 +507,7 @@
                 if (notFoundBox) notFoundBox.classList.add("hidden");
                 if (guestCountBox) guestCountBox.classList.add("hidden");
                 if (hotelesBox) hotelesBox.classList.add("hidden");
+                if (nota_importante) nota_importante.classList.add("hidden");
 
                 cards.forEach(c => c.classList.remove("is-active"));
             });
