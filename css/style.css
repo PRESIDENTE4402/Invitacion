@@ -91,8 +91,8 @@ body{font-family:Inter,system-ui,sans-serif;background:#ccca8e;color:#fff}
 }
 
 .story-text {
-  background: #f8fbff; 
-  border: 1px solid #e5ecf5;
+  background: #fafafa; 
+  border-radius: 10px;
   padding: 40px 50px;
   line-height: 1.8;
   color: #121212;
@@ -420,7 +420,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#ccca8e;color:#fff}
 
 /* RSVP */
 .rsvp{
-  background:#000000; /* fondo negro elegante */
+  background:#fff; /* fondo negro elegante */
   color:var(--accent); /* dorado suave */
   display:grid;
   place-items:center;
@@ -431,8 +431,17 @@ body{font-family:Inter,system-ui,sans-serif;background:#ccca8e;color:#fff}
 }
 
 .rsvp-inner{
-  max-width:760px;
-  margin:0 auto;
+   background: #fafafa; 
+  border-radius: 10px;
+  padding: 10px 10px;
+  line-height: 1.8;
+  color: #121212;
+  font-size: 2.5rem;
+  font-family:'Great Vibes', cursive;
+  text-align: center; 
+  margin: auto;           /* lo centra en la columna */
+  max-width: 600px;       /* controla el ancho */
+  box-shadow: 0 2px 8px rgba(253, 251, 251, 0.992);
 }
 
 .rsvp-phrase{
@@ -501,20 +510,20 @@ body{font-family:Inter,system-ui,sans-serif;background:#ccca8e;color:#fff}
 
 /* GALERÍA */
 .gallery {
-  background: #e7e2e2;
-  padding: 80px 20px;
+  background: #fff;
+  padding: 20px 20px;
   text-align: center;
   min-height: 100vh; 
 }
 
 .gallery-header {
-  margin-bottom: 50px;
+  margin-bottom: 5px;
   position: relative;
 }
 
 .gallery-header i {
   font-size: 2.5rem;
-  color: #999c6d; /* Bordó */
+  color: #fff; /* Bordó */
   display: block;
   margin-bottom: 10px;
 }
@@ -541,7 +550,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#ccca8e;color:#fff}
   grid-template-columns: 2fr 1fr 2fr; /* grande - chicas - grande */
   grid-template-rows: repeat(2, 1fr); /* 2 filas iguales */
   gap: 15px;
-  margin-top: 20px;
+  margin-top: 5px;
   align-items: stretch;
 }
 
@@ -608,14 +617,10 @@ body{font-family:Inter,system-ui,sans-serif;background:#ccca8e;color:#fff}
 
 
 
-
-
-
-
 /* ====== REGALO ====== */
 .gift {
   background: #f8fbff;
-  padding: 80px 20px;
+  padding: 10px 10px;
   text-align: center;
   /* líneas divisorias eliminadas */
 }
@@ -628,14 +633,13 @@ body{font-family:Inter,system-ui,sans-serif;background:#ccca8e;color:#fff}
 .gift-icon {
   font-size: 3rem;
   color: #aeb178; /* Bordó elegante */
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .gift-title {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2.8rem;
-  color: #0f1c2e;
-  margin-bottom: 20px;
+  font-family: 'Great Vibes', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
 }
 
 .gift-text {
@@ -928,7 +932,7 @@ html{scroll-behavior:smooth;text-rendering:optimizeLegibility}
 .when-where h2,
 .gallery-header h2,
 .gift-title{
-  font-family:'Playfair Display',serif;
+   font-family: 'Great Vibes', sans-serif;
   letter-spacing:.5px;
   color:var(--ink);
 }
