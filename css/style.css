@@ -1,12 +1,12 @@
 :root{
   --accent: #e3c17c;   /* Dorado suave */
   --muted: #f1f1f1;    /* Gris claro para fecha */
-  --shadow: rgba(0,0,0,.45);
+  --shadow: rgba(230, 224, 224, 0.45);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
 /* fondo blanco por defecto, texto oscuro */
-body{font-family:Inter,system-ui,sans-serif;background:#fff;color:#222}
+body{font-family:Inter,system-ui,sans-serif;background:#ccca8e;color:#fff}
 
 /* HERO */
 .hero{
@@ -66,7 +66,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#fff;color:#222}
   justify-content:center;
   padding: 60px 20px;
   background: #fff;
-  color: #222;
+  color: #f9f5f5;
 }
 .padres-inner{max-width:960px;text-align:center;padding:10px}
 .padres-heading{
@@ -79,9 +79,9 @@ body{font-family:Inter,system-ui,sans-serif;background:#fff;color:#222}
 }
 .padres-columns{display:flex;gap:48px;justify-content:center;margin-bottom:18px}
 .padres .parent-list{font-family: 'Lora', serif;color:#333;line-height:1.4}
-.padres-couple{font-family:'Parisienne',cursive;font-size:clamp(2rem,6vw,3.4rem);color:#8b6b2e;margin:6px 0}
+.padres-couple{font-family:'Parisienne',cursive;font-size:clamp(1.5rem,4vw,3rem);color:#8b6b2e;margin:6px 0}
 .padres-couple .and{margin:0 8px;font-family:'Lora',serif;font-size:1.1rem}
-.padres-invite{font-family:'Lora',serif;color:#444;margin-top:8px}
+.padres-invite{font-family:'Lora',serif;color:#fff;margin-top:8px}
 
 .story-photo img {
   width: 100%;
@@ -95,13 +95,13 @@ body{font-family:Inter,system-ui,sans-serif;background:#fff;color:#222}
   border: 1px solid #e5ecf5;
   padding: 40px 50px;
   line-height: 1.8;
-  color: #333;
+  color: #fff;
   font-size: 2.5rem;
   font-family:'Great Vibes', cursive;
   text-align: center; 
   margin: auto;           /* lo centra en la columna */
   max-width: 600px;       /* controla el ancho */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  box-shadow: 0 2px 8px rgba(253, 251, 251, 0.992);
 }
 
 
@@ -235,12 +235,43 @@ body{font-family:Inter,system-ui,sans-serif;background:#fff;color:#222}
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   overflow: hidden;
 }
+.event-photo {
+  position: relative;
+  overflow: hidden;
+  background: transparent; /* Asegura que no haya fondo propio */
+  margin: 0; /* Evita líneas entre secciones */
+  padding: 0;
+  border: none;
+}
+
+.event-photo::before,
+.event-photo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 80px; /* Ajusta según tu diseño */
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Ajusta 'white' al color real del fondo de tu página o sección */
+.event-photo::before {
+  top: 0;
+  background: linear-gradient(to bottom, white 0%, transparent 100%);
+}
+
+.event-photo::after {
+  bottom: 0;
+  background: linear-gradient(to top, white 0%, transparent 100%);
+}
 
 .event-photo img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
+
 
 .event-info {
   padding: 30px;
@@ -820,15 +851,22 @@ section:first-of-type::after{ display: none !important; height: 0 !important; ba
 }
 /* ==== Overrides elegantes y accesibles ==== */
 :root{
-  --accent:#c7a767;    /* dorado con mejor contraste */
-  --accent-2:#8b6b2e;  /* dorado oscuro para textos */
+  --accent:#c7a767;
+  --accent-2:#8b6b2e;
   --ink:#222;
   --muted:#f2efe9;
-  --bg:#000;
+  --bg:#ffffff;  /* 👈 blanco (o el color que quieras como fondo base) */
   --shadow:rgba(0,0,0,.45);
 }
+
+body{
+  font-family:Inter,system-ui,sans-serif;
+  background:var(--bg);
+  color:#fff; /* si quieres seguir con texto claro en las secciones oscuras */
+}
+
 html{scroll-behavior:smooth;text-rendering:optimizeLegibility}
-body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:#fff}
+
 
 /* Jerarquía tipográfica */
 .hero-names{letter-spacing:.5px}
@@ -918,4 +956,11 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:#fff}
   .padres-couple { font-size: clamp(1.2rem,5.5vw,2.2rem) !important; }
 }
 
+
+.se_llevara {
+  font-family: 'Great Vibes', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  margin-top: 50px;
+}
 
