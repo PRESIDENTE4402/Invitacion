@@ -828,3 +828,26 @@ body {
     font-weight: 700;
     color: #4a411b;
 }
+.field label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+}
+
+.field input[type="tel"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.2s ease;
+}
+
+.field input[type="tel"]:focus {
+    border-color: #d4af37;
+    box-shadow: 0 0 4px rgba(212, 175, 55, 0.3);
+}

@@ -46,6 +46,13 @@
                         placeholder="Empieza a escribir tu nombre…">
                     <ul id="suggestions" class="suggestions-list"></ul>
                 </div>
+
+                <div class="field">
+                    <label for="telefonoInput">Número de teléfono</label>
+                    <input type="tel" id="telefonoInput" name="telefono" placeholder="Ejemplo: 502 1234 5678"
+                        maxlength="15">
+                </div>
+
                 <!-- Caja que aparece cuando NO se encuentra el nombre -->
                 <div id="notFoundBox" class="not-found hidden">
                     <p>No encontramos tu nombre en la lista.<br>
@@ -267,6 +274,7 @@
             const cards = document.querySelectorAll(".rsvp-card");
             const form = document.getElementById("rsvpForm");
             const guestInput = document.getElementById("nombreInput");
+            const telefonoInput = document.getElementById("telefonoInput");
             const suggestionBox = document.getElementById("suggestions");
             const notFoundBox = document.getElementById("notFoundBox");
             const sideHidden = document.getElementById("sideHidden");
@@ -279,7 +287,7 @@
 
 
             // Si falta algo crítico, no seguimos para evitar errores
-            if (!form || !guestInput || !suggestionBox || !sideHidden || !sideLabel) {
+            if (!form || !guestInput || !telefonoInput || !suggestionBox || !sideHidden || !sideLabel) {
                 console.error("Faltan elementos necesarios en el DOM para el formulario de RSVP.");
                 return;
             }
@@ -300,7 +308,7 @@
                 if (invitadoObj) {
                     mostrarCantidad(invitadoObj.cantidad);
                     if (hotelesBox) hotelesBox.classList.remove("hidden");
-                    if (nota_importante) nota_importante.classList.remove("hidden");                    
+                    if (nota_importante) nota_importante.classList.remove("hidden");
                 }
             }
 
@@ -329,6 +337,7 @@
 
                     // limpiar input y sugerencias
                     guestInput.value = "";
+                    telefonoInput.value = "";
                     suggestionBox.innerHTML = "";
                     suggestionBox.style.display = "none";
                     if (notFoundBox) notFoundBox.classList.add("hidden");
@@ -407,6 +416,7 @@
 
                 const lado = sideHidden.value || "";
                 const invitado = guestInput.value ? guestInput.value.trim() : "";
+                const numero = telefonoInput.value ? telefonoInput.value.trim() : "";
                 const mensaje = extraInfo && extraInfo.value
                     ? extraInfo.value.trim()
                     : "";
@@ -418,6 +428,10 @@
 
                 if (!invitado) {
                     mostrarAlerta("Falta tu nombre", "Por favor escribe tu nombre.");
+                    return;
+                }
+                if (!numero) {
+                    mostrarAlerta("Falta tu numero", "Por favor escribe tu numero.");
                     return;
                 }
 
@@ -471,6 +485,7 @@
                     body: new URLSearchParams({
                         lado: lado,
                         nombre: invitado,
+                        numero: numero,
                         cantidad: cantidadFinal,
                         mensaje: mensaje
                     })
