@@ -851,3 +851,15 @@ body {
     border-color: #d4af37;
     box-shadow: 0 0 4px rgba(212, 175, 55, 0.3);
 }
+#desktop-warning {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  color: #222;
+  font-size: 1.8rem;
+  font-family: sans-serif;
+  text-align: center;
+  padding-top: 40vh;
+  z-index: 999999;
+}
