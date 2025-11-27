@@ -14,10 +14,10 @@
 
 <body>
 
-      <div id="desktop-warning">
-  Este sitio está optimizado únicamente para dispositivos móviles 📱<br>
-  Por favor, ábrelo desde un celular.
-</div>
+    <div id="desktop-warning">
+        Este sitio está optimizado únicamente para dispositivos móviles 📱<br>
+        Por favor, ábrelo desde un celular.
+    </div>
     <main class="page">
         <section class="card">
             <h1 class="title-script">Confirmación de asistencia</h1>
@@ -118,10 +118,10 @@
                         <h4>Hotel Los Delfines Cubulco</h4>
                         <p>A 5 minutos del evento — Habitaciones desde Q150 por pesona. 45781878</p>
                         <a class="hotel-btn" href="https://wa.me/50245781878" target="_blank">
-                            Reservar por WhatsApp 
+                            Reservar por WhatsApp
                         </a>
                         <a class="hotel-btn hotel-btn-call" href="tel:+50245781878">
-                            Llamar al hotel 
+                            Llamar al hotel
                         </a>
 
                     </div>
@@ -130,11 +130,11 @@
                         <h4>Hotel Don Alex</h4>
                         <p>A 5 minutos del evento — Habitaciones desde Q125. 31977269</p>
                         <a class="hotel-btn" href="https://wa.me/50231977269" target="_blank">
-                            Reservar por WhatsApp 
+                            Reservar por WhatsApp
                         </a>
 
                         <a class="hotel-btn hotel-btn-call" href="tel:+50231977269">
-                            Llamar al hotel 
+                            Llamar al hotel
                         </a>
                     </div>
 
@@ -142,11 +142,11 @@
                         <h4>Hotel Magdalena</h4>
                         <p>A 5 minutos del evento. 49858570</p>
                         <a class="hotel-btn" href="https://wa.me/50249858570" target="_blank">
-                            Reservar por WhatsApp 
+                            Reservar por WhatsApp
                         </a>
 
                         <a class="hotel-btn hotel-btn-call" href="tel:+50249858570">
-                            Llamar al hotel 
+                            Llamar al hotel
                         </a>
                     </div>
 
@@ -154,11 +154,11 @@
                         <h4>Hotel Emanuel</h4>
                         <p>A 5 minutos del evento. 30177788</p>
                         <a class="hotel-btn" href="https://wa.me/50230177788" target="_blank">
-                            Reservar por WhatsApp 
+                            Reservar por WhatsApp
                         </a>
 
                         <a class="hotel-btn hotel-btn-call" href="tel:+50230177788">
-                            Llamar al hotel 
+                            Llamar al hotel
                         </a>
                     </div>
                 </div>
@@ -238,7 +238,7 @@
                     { nombre: "LUIS PEREZ PEREZ", cantidad: 1 },
                     { nombre: "BYRON JUAREZ", cantidad: 1 },
                     { nombre: "MIRNA COLINDRES", cantidad: 2 },
-                    { nombre: "ANDREA MORALES LEMUS", cantidad: 1 },
+                    { nombre: "ANDREA MORALES LEMUS", cantidad: 2 },
                     { nombre: "PATRICIA HERNANDEZ CHAJON", cantidad: 2 },
                     { nombre: "OSCAR GUZMAN", cantidad: 2 },
                     { nombre: "ISRAEL DE DIOS", cantidad: 2 },
@@ -284,7 +284,7 @@
                     { nombre: "CARLOS VASQUEZ", cantidad: 1 },
                     { nombre: "CAAL JUC", cantidad: 1 },
                     { nombre: "BYRON RAC", cantidad: 1 },
-                    { nombre: "WILLIAM CANEL", cantidad: 1 },            
+                    { nombre: "WILLIAM CANEL", cantidad: 1 },
                     { nombre: "JACOB MORATAYA", cantidad: 1 },
                     { nombre: "JAVIER MONTES", cantidad: 1 },
                     { nombre: "BRANDOL GARCIA MEJIA", cantidad: 1 },
@@ -549,7 +549,7 @@
                         } else {
                             mostrarAlerta("Avisar por WhatsApp", "Por favor enviar mensaje de confirmación a los novios por WhatsApp.", false, lado, invitado, cantidadFinal);
                             console.log("Hubo un pequeño error: " + result);
-                            
+
                         }
                     })
                     .catch(err => {
@@ -565,7 +565,7 @@
                     `¡Gracias ${invitado.split(" ")[0]}! Tu asistencia quedó confirmada para ${cantidadFinal} persona${cantidadFinal > 1 ? "s" : ""}. ¡Nos vemos!`,
                     true, lado, invitado, cantidadFinal  // ← ESTE "true" activa el borrado de caché solo aquí
                 );
-                
+
 
                 // Reset visual
                 form.reset();
@@ -581,7 +581,7 @@
 
                 cards.forEach(c => c.classList.remove("is-active"));
                 // Fuerza recarga desde el servidor, no desde caché
-                
+
 
             });
         });
@@ -620,10 +620,10 @@
                                     await cache.delete(request);
                                 }
                             }
-                        } 
+                        }
 
-                        if(lado && invitado && cantidadFinal)
-                        enviarWhatsApp(lado, invitado, cantidadFinal);
+                        if (lado && invitado && cantidadFinal)
+                            enviarWhatsApp(lado, invitado, cantidadFinal);
                         console.log("Caché limpiada – próxima confirmación funcionará perfecto ");
                     } catch (err) {
                         // Silencioso: no molestamos al usuario si falla
@@ -688,12 +688,12 @@
 
 
         document.addEventListener("DOMContentLoaded", function () {
-  const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+            const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
 
-  if (!isMobile) {
-    document.getElementById("desktop-warning").style.display = "block";
-  }
-});
+            if (!isMobile) {
+                document.getElementById("desktop-warning").style.display = "block";
+            }
+        });
     </script>
 
 
