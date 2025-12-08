@@ -863,3 +863,49 @@ body {
   padding-top: 40vh;
   z-index: 999999;
 }
+.consejo-rapido {
+    /* Contenedor principal */
+    background-color: #f0f8ff; /* Azul muy claro para destacar */
+    border: 1px solid #b0e0e6; /* Borde más oscuro */
+    border-left: 5px solid #4682b4; /* Barra izquierda para énfasis */
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 8px; /* Esquinas redondeadas */
+    font-family: Arial, sans-serif; /* Fuente legible */
+    max-width: 600px; /* Limita el ancho para que se vea bien en el centro */
+}
+
+.consejo-rapido h3 {
+    /* Título */
+    color: #4682b4; /* Color del borde de la izquierda */
+    margin-top: 0;
+    font-size: 1.2em;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e0ffff; /* Línea separadora suave */
+}
+
+.consejo-rapido ul {
+    /* Lista */
+    list-style-type: none; /* Quita los puntos de la lista */
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.consejo-rapido li {
+    /* Elementos de la lista */
+    margin-bottom: 8px;
+    line-height: 1.4;
+    color: #333;
+}
+
+.consejo-rapido strong {
+    /* Resaltado dentro del texto */
+    color: #0056b3; /* Un azul más fuerte */
+    font-weight: 700;
+}
+
+.consejo-rapido em {
+    /* Texto cursiva */
+    color: #555;
+    font-style: italic;
+}
